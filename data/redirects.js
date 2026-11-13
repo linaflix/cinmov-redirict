@@ -425,7 +425,6 @@ const redirectRules = [
   { path: "/film/fiche-738370.html", destination: "https://mega.cinmov.com/movie/738370" },
   { path: "/film/fiche-75674.html", destination: "https://mega.cinmov.com/movie/75674" },
   { path: "/film/fiche-93837.html", destination: "https://mega.cinmov.com/movie/93837" },
-  { path: "/film/fiche-9471.html", destination: "https://mega.cinmov.com/movie/9471" },
-  { path: "/film.html", destination: "https://mega.cinmov.com/movie/9769" },
+  { path: "/film/fiche-9471.html", destination: "https://mega.cinmov.com/movie/9471" }, 
 ];
 module.exports = { redirectRules };
