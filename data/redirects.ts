@@ -1,3 +1,4 @@
+// Généré automatiquement
 export const redirectRules = [
   { path: "/film/fiche-2100.html", destination: "https://mega.cinmov.com/movie/2100" },
   { path: "/film/fiche-99861.html", destination: "https://mega.cinmov.com/movie/99861" },
