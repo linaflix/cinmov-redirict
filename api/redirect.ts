@@ -4,18 +4,18 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 const map = new Map();
-redirectRules.forEach(r => map.set(r.original.toLowerCase(), r.destination));
+// On utilise le chemin (path) comme clé
+redirectRules.forEach(r => map.set(r.path.toLowerCase(), r.destination));
 
 export default async (req: VercelRequest, res: VercelResponse) => {
-  const host = req.headers.host || '';
-  const proto = req.headers['x-forwarded-proto'] || 'https';
-  const url = `${proto}://${host}${req.url}`.toLowerCase();
+  // On récupère uniquement le chemin de l'URL demandée
+  const reqPath = req.url?.split('?')[0].toLowerCase() || '';
 
-  if (map.has(url)) {
-    return res.redirect(301, map.get(url));
+  if (map.has(reqPath)) {
+    return res.redirect(301, map.get(reqPath));
   }
 
-  // Servir la 404 personnalisée
+  // Si pas de correspondance, on sert la 404 personnalisée
   res.statusCode = 404;
   res.setHeader('Content-Type', 'text/html');
   try {
