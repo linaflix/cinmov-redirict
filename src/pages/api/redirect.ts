@@ -1,7 +1,8 @@
 import { VercelRequest, VercelResponse } from '@vercel/node';
 import { redirectRules } from '../../../data/redirects';
+import * as fs from 'fs';
+import * as path from 'path';
 
-// Création d'une Map pour recherche ultra-rapide O(1)
 const redirectMap = new Map<string, string>();
 redirectRules.forEach(rule => redirectMap.set(rule.original.toLowerCase(), rule.destination));
 
@@ -10,11 +11,20 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const protocol = req.headers['x-forwarded-proto'] || 'https';
   const currentUrl = `${protocol}://${host}${req.url}`.toLowerCase();
 
-  // Vérification exacte
+  // 1. Vérification exacte dans la liste
   if (redirectMap.has(currentUrl)) {
     return res.redirect(301, redirectMap.get(currentUrl)!);
   }
   
-  // Fallback vers la page d'accueil si non trouvé
-  return res.redirect(302, 'https://mega.cinmov.com');
+  // 2. Si non trouvé, servir la page 404 personnalisée
+  res.statusCode = 404;
+  res.setHeader('Content-Type', 'text/html');
+  
+  try {
+      const errorPagePath = path.join(__dirname, '../../../public/404.html');
+      const errorPage = fs.readFileSync(errorPagePath, 'utf8');
+      res.end(errorPage);
+  } catch (e) {
+      res.end('<h1>404 - Not Found</h1><p><a href="https://mega.cinmov.com">Retour à l\'accueil</a></p>');
+  }
 }

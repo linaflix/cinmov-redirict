@@ -3,14 +3,9 @@
     "version": "1.0.0",
     "private": true,
     "scripts": {
-        "dev": "vercel dev",
-        "build": "tsc"
+        "dev": "vercel dev"
     },
     "dependencies": {
-        "@vercel\/node": "^3.0.0"
-    },
-    "devDependencies": {
-        "typescript": "^5.0.0",
-        "@types\/node": "^20.0.0"
+        "@vercel\/node": "^3.0.13"
     }
 }

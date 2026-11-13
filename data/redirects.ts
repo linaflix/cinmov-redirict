@@ -1,4 +1,4 @@
-// Généré automatiquement le 2026-11-13 14:01:29
+// Généré automatiquement le 2026-11-13 14:15:13
 export interface RedirectRule {
   original: string;
   destination: string;
@@ -15,6 +15,14 @@ export const redirectRules: RedirectRule[] = [
   },
   {
     original: "https://vip.cinmov.com/",
+    destination: "https://mega.cinmov.com/"
+  },
+  {
+    original: "https://fr.cinmov.com/",
+    destination: "https://mega.cinmov.com/"
+  },
+  {
+    original: "https://www.cinmov.com/",
     destination: "https://mega.cinmov.com/"
   },
   {

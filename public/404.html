@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Non Trouvée - Redirection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body { background: #0a0a0a; color: #e0e0e0; font-family: 'Inter', sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; text-align: center; padding: 20px; }
+        .container { max-width: 600px; }
+        h1 { font-family: 'Montserrat', sans-serif; font-size: 4rem; color: #00ff88; margin: 0; line-height: 1; }
+        h2 { font-size: 1.5rem; margin-top: 10px; color: #fff; }
+        p { color: #888; line-height: 1.6; margin-bottom: 30px; }
+        .btn { display: inline-block; background: #00ff88; color: #000; padding: 15px 30px; border-radius: 8px; text-decoration: none; font-weight: 700; font-family: 'Montserrat', sans-serif; transition: transform 0.2s; }
+        .btn:hover { transform: scale(1.05); background: #00cc6a; }
+        .search-box { margin-top: 30px; padding: 20px; background: rgba(255,255,255,0.05); border-radius: 12px; border: 1px solid #333; }
+        code { background: #222; padding: 2px 6px; border-radius: 4px; color: #00ff88; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>404</h1>
+        <h2>Oups ! Cette page a déménagé.</h2>
+        <p>Le film ou la série que vous cherchez n'est plus à cette adresse.<br>Nous avons migré tout notre catalogue vers une nouvelle plateforme plus rapide.</p>
+        <a href="https://mega.cinmov.com" class="btn">🚀 Aller sur Mega.Cinmov.com</a>
+        <div class="search-box">
+            <p style="margin-bottom: 10px; font-size: 0.9rem;">Vous cherchiez peut-être :</p>
+            <p style="font-size: 0.8rem;">L'URL demandée était : <code id="currentUrl">...</code></p>
+        </div>
+    </div>
+    <script>
+        document.getElementById('currentUrl').textContent = window.location.href;
+    </script>
+</body>
+</html>

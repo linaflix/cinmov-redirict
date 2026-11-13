@@ -2,13 +2,14 @@
     "redirects": [],
     "rewrites": [
         {
-            "source": "\/(.*)",
-            "destination": "\/api\/redirect"
+            "source": "/(.*)",
+            "destination": "/api/redirect"
         }
     ],
+    "cleanUrls": true,
     "headers": [
         {
-            "source": "\/(.*)",
+            "source": "/(.*)",
             "headers": [
                 {
                     "key": "X-Content-Type-Options",
