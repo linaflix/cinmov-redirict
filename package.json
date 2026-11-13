@@ -1,5 +1,11 @@
 {
-    "name": "cinmov-redirects",
-    "version": "1.0.0",
-    "private": true
+  "name": "cinmov-redirects",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vercel dev"
+  },
+  "dependencies": {
+    "@vercel/node": "^3.0.13"
+  }
 }
