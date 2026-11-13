@@ -2,27 +2,50 @@ const fs = require('fs');
 const path = require('path');
 const { redirectRules } = require('../data/redirects');
 
-const map = new Map();
-redirectRules.forEach(r => map.set(r.path.toLowerCase(), r.destination));
+// Fonction pour extraire l'ID d'une URL (copie de la logique PHP)
+function getIdFromUrl(url) {
+    const patterns = [
+        /fiche-(\d+)\.html/i,
+        /film\/(\d+)\.html/i,
+        /id=(\d+)/i,
+        /film\/(\d+)/i
+    ];
+    for (const p of patterns) {
+        const m = url.match(p);
+        if (m) return parseInt(m[1]);
+    }
+    return null;
+}
+
+function getTypeFromUrl(url) {
+    return (/\/tv\/|\/serie\/|\/series\//i.test(url)) ? 'tv' : 'movie';
+}
 
 module.exports = (req, res) => {
-  const urlPath = (req.url || '').split('?')[0].toLowerCase();
+  // Récupérer l'URL complète demandée (path + query)
+  const fullUrl = (req.url || '').toLowerCase();
+  const targetDomain = "https://mega.cinmov.com";
 
-  if (map.has(urlPath)) {
-    res.writeHead(301, { 'Location': map.get(urlPath) });
-    res.end();
-    return;
+  // 1. Essayer de trouver une correspondance exacte dans la liste générée
+  const exactMatch = redirectRules.find(r => r.pattern.toLowerCase() === fullUrl || r.path.toLowerCase() === fullUrl.split('?')[0]);
+  
+  if (exactMatch) {
+      res.writeHead(301, { 'Location': exactMatch.destination });
+      res.end();
+      return;
   }
 
-  if (!urlPath.endsWith('.html') && !urlPath.endsWith('/')) {
-      const tryHtml = urlPath + '.html';
-      if (map.has(tryHtml)) {
-        res.writeHead(301, { 'Location': map.get(tryHtml) });
-        res.end();
-        return;
-      }
+  // 2. Si pas de match exact, essayer d'extraire l'ID dynamiquement (Fallback universel)
+  const id = getIdFromUrl(fullUrl);
+  if (id) {
+      const type = getTypeFromUrl(fullUrl);
+      const newUrl = `${targetDomain}/${type}/${id}`;
+      res.writeHead(301, { 'Location': newUrl });
+      res.end();
+      return;
   }
 
+  // 3. 404
   res.statusCode = 404;
   res.setHeader('Content-Type', 'text/html');
   try {
