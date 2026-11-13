@@ -1,0 +1,14 @@
+{
+    "rewrites": [
+        {
+            "source": "/(.*)",
+            "destination": "/api/redirect.ts"
+        }
+    ],
+    "functions": {
+        "api/redirect.ts": {
+            "memory": 128,
+            "maxDuration": 10
+        }
+    }
+}
