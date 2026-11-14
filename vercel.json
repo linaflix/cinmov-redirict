@@ -1,13 +1,15 @@
 {
     "framework": null,
-    "rewrites": [
+    "redirects": [
         {
             "source": "/",
-            "destination": "https://mega.cinmov.com"
+            "destination": "https://mega.cinmov.com",
+            "permanent": true
         },
         {
             "source": "/(.+)",
-            "destination": "https://mega.cinmov.com/api/redirect.php?url=$1"
+            "destination": "https://mega.cinmov.com/api/redirect.php?url=$1",
+            "permanent": false
         }
     ],
     "headers": [
