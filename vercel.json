@@ -5,11 +5,12 @@
             "source": "/",
             "destination": "https://mega.cinmov.com",
             "permanent": true
-        },
+        }
+    ],
+    "rewrites": [
         {
             "source": "/(.+)",
-            "destination": "https://mega.cinmov.com/api/redirect.php?url=$1",
-            "permanent": false
+            "destination": "https://mega.cinmov.com/api/redirect.php?url=$1"
         }
     ],
     "headers": [
