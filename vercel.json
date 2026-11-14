@@ -2,7 +2,11 @@
     "framework": null,
     "rewrites": [
         {
-            "source": "/(.*)",
+            "source": "/",
+            "destination": "https://mega.cinmov.com"
+        },
+        {
+            "source": "/(.+)",
             "destination": "https://mega.cinmov.com/api/redirect.php?url=$1"
         }
     ],
@@ -16,7 +20,7 @@
                 },
                 {
                     "key": "Cache-Control",
-                    "value": "public, max-age=31536000, s-maxage=31536000"
+                    "value": "public, max-age=3600, s-maxage=86400"
                 }
             ]
         }
